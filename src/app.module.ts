@@ -5,6 +5,10 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
+import { OrganizationService } from './organization/organization.service';
+import { OrganizationController } from './organization/organization.controller';
+import { OrganizationModule } from './organization/organization.module';
 
 @Module({
   imports: [
@@ -12,8 +16,10 @@ import { ConfigModule } from '@nestjs/config';
     PrismaModule,
     PokemonModule,
     AuthModule,
+    UserModule,
+    OrganizationModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, OrganizationController],
+  providers: [AppService, OrganizationService],
 })
 export class AppModule {}
