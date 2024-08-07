@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { AuthDto, SignupDto } from './dto';
 import { ConfigService } from '@nestjs/config';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -57,15 +58,26 @@ export class AuthService {
   async signToken(
     userId: number,
     email: string,
-  ): Promise<{ access_token: string }> {
+  ): Promise<{ access_token: string; user: unknown }> {
     const secret = this.config.get('JWT_SECRET');
     const payload = { sub: userId, email };
 
     const token = await this.jwt.signAsync(payload, {
-      expiresIn: '15m',
+      expiresIn: '1d',
       secret: secret,
     });
 
-    return { access_token: token };
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        organizationId: true,
+        email: true,
+      },
+    });
+
+    return { access_token: token, user: user };
   }
 }

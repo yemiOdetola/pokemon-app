@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+  ) {}
 
   async findAll() {
     return await this.prisma.user.findMany();
@@ -14,13 +18,4 @@ export class UserService {
     delete user.password;
     return user;
   }
-
-  // async update(id: number, updateUserDto: UpdateUserDto) {
-  //   const newUser = await this.prisma.user.update({
-  //     where: { id },
-  //     data: updateUserDto,
-  //   });
-  //   delete newUser.password;
-  //   return newUser;
-  // }
 }
