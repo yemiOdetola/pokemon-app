@@ -15,6 +15,3 @@ npx ts-node prisma/generateData.ts
 
 # Import Pokemon
 npx ts-node prisma/importPokemon.ts
-
-# Start the application
-npm run start:prod
