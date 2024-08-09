@@ -158,25 +158,6 @@ export class PokemonService {
     };
   }
 
-  // async toggleFavorite(payload: ToggleFavoriteDto) {
-  //   const { userId, pokemonId, liked } = payload;
-  //   console.log({ userId, pokemonId, liked });
-  //   const existingFavorite = await this.prisma.favorite.findUnique({
-  //     where: { userId_pokemonId: { userId, pokemonId } },
-  //   });
-
-  //   if (existingFavorite) {
-  //     return this.prisma.favorite.update({
-  //       where: { id: existingFavorite.id },
-  //       data: { liked },
-  //     });
-  //   } else {
-  //     return this.prisma.favorite.create({
-  //       data: { userId, pokemonId, liked },
-  //     });
-  //   }
-  // }
-
   async toggleFavorite(payload: ToggleFavoriteDto) {
     const { userId, pokemonId, liked } = payload;
     const existingFavorite = await this.prisma.favorite.findUnique({

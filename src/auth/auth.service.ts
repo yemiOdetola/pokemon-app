@@ -5,7 +5,6 @@ import * as bcrypt from 'bcrypt';
 import { AuthDto, SignupDto } from './dto';
 import { ConfigService } from '@nestjs/config';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
