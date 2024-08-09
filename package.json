@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "build": "db:dev:restart && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "db:dev:restart && nest start",
     "start:dev": "nest start --watch",
@@ -15,20 +15,16 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "generate-data": "ts-node prisma/generateData.ts",
     "import-pokemon": "ts-node prisma/importPokemon.ts",
-
     "initialize": "yarn generate-data && sleep 1 && yarn import-pokemon",
     "initialize:test": "dotenv -e .env.test -- yarn generate-data && sleep 1 && dotenv -e .env.test -- yarn import-pokemon",
-
     "prisma:dev:deploy": "prisma migrate deploy",
     "db:dev:rm": "docker compose rm dev-db -s -f -v",
     "db:dev:up": "docker compose up dev-db -d",
     "db:dev:restart": "yarn db:dev:rm && yarn db:dev:up && sleep 1 && yarn prisma:dev:deploy && yarn initialize",
-
     "prisma:test:deploy": "dotenv -e .env.test -- prisma migrate deploy",
     "db:test:rm": "docker compose rm test-db -s -f -v",
     "db:test:up": "docker compose up test-db -d",
     "db:test:restart": "yarn db:test:rm && yarn db:test:up && sleep 1 && sleep 1 && yarn prisma:test:deploy && sleep 1 && yarn initialize:test",
-    
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
