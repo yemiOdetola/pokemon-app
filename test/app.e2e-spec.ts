@@ -4,7 +4,7 @@ import * as pactum from 'pactum';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { AuthDto, SignupDto } from 'src/auth/dto';
-import { ToggleFavoriteDto } from 'src/pokemon/dto/query-pokemon.dto';
+// import { ToggleFavoriteDto } from 'src/pokemon/dto/query-pokemon.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
